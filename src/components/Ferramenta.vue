@@ -46,7 +46,9 @@ export default {
             {enfase:1,criterio:3,formato:1},
             {enfase:1,criterio:4,formato:1},
             {enfase:4,criterio:1,formato:1},
-            {enfase:4,criterio:2,formato:1}
+            {enfase:4,criterio:2,formato:1},
+            {enfase:4,criterio:3,formato:1},
+            {enfase:4,criterio:4,formato:1}
           ]
         },
         {
@@ -77,14 +79,22 @@ export default {
           nome: 'PIKTOCHART',
           selecao: [
             {enfase:3,criterio:2,formato:1},
-            {enfase:3,criterio:3,formato:1}
+            {enfase:3,criterio:3,formato:1},
+            {enfase:5,criterio:2,formato:1},
+            {enfase:5,criterio:3,formato:1}
           ]
         },
         {
           id: 7,
           nome: 'VENNGAGE',
           selecao: [
-            {enfase:4,criterio:2,formato:1}
+            {enfase:4,criterio:2,formato:1},
+            {enfase:4,criterio:3,formato:1},
+            {enfase:4,criterio:4,formato:1},
+            {enfase:5,criterio:1,formato:1},
+            {enfase:5,criterio:2,formato:1},
+            {enfase:5,criterio:3,formato:1},
+            {enfase:5,criterio:4,formato:1}
           ]
         },
         {
@@ -105,7 +115,23 @@ export default {
             {enfase:3,criterio:4,formato:2},
             {enfase:4,criterio:1,formato:2},
             {enfase:4,criterio:2,formato:1},
-            {enfase:4,criterio:2,formato:2}
+            {enfase:4,criterio:2,formato:2},
+            {enfase:4,criterio:3,formato:1},
+            {enfase:4,criterio:3,formato:2},
+            {enfase:4,criterio:4,formato:1},
+            {enfase:4,criterio:4,formato:2},
+            {enfase:5,criterio:1,formato:1},
+            {enfase:5,criterio:1,formato:2},
+            {enfase:5,criterio:2,formato:1},
+            {enfase:5,criterio:2,formato:2},
+            {enfase:5,criterio:3,formato:1},
+            {enfase:5,criterio:3,formato:2},
+            {enfase:5,criterio:4,formato:1},
+            {enfase:5,criterio:4,formato:2},
+            {enfase:6,criterio:1,formato:2},
+            {enfase:6,criterio:2,formato:2},
+            {enfase:6,criterio:3,formato:2},
+            {enfase:6,criterio:4,formato:2}
           ]
         }
       ],
