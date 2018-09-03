@@ -13,7 +13,7 @@
             </v-list-tile-content>
             <v-list-tile-avatar v-if="criterio===selected"><v-icon>checked</v-icon></v-list-tile-avatar>
           </v-list-tile>
-          <v-divider v-if="index < criterios.length"></v-divider>
+          <v-divider v-if="index < criterios.length-1"></v-divider>
         </div>
       </v-list>
             

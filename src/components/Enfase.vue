@@ -13,7 +13,7 @@
             </v-list-tile-content>
             <v-list-tile-avatar v-if="enfase===selected"><v-icon>checked</v-icon></v-list-tile-avatar>
           </v-list-tile>
-          <v-divider v-if="index < enfases.length"></v-divider>
+          <v-divider v-if="index < enfases.length-1"></v-divider>
         </div>
       </v-list>
             
