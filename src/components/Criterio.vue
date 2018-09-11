@@ -20,7 +20,9 @@
         <v-list-tile 
           :disabled="enfase===undefined" 
           ripple
-          @click="app_selectCriterio(index)">
+          @click="app_selectCriterio(index)"
+          @mouseover.prevent.stop="app_mouseOverCriterio(index)"
+          @mouseleave.prevent.stop="app_mouseLeaveCriterio()">
 
           <v-list-tile-content>
             <v-list-tile-title v-text="criterio.nome"/>
@@ -46,10 +48,10 @@ export default {
     return {
       enfase: undefined,
       criterios: [
-        { id: 1, nome: "Qtd. de Modelos" },
-        { id: 2, nome: "Impacto Visual" },
-        { id: 3, nome: "Facilidade de Uso" },
-        { id: 4, nome: "Gratuidade" }
+        { id: 1, nome: "Qtd. de Modelos", descricao: "infográficos já elaborados e compartilhados online, que servem como referência e podem ser manipulados" },
+        { id: 2, nome: "Impacto Visual", descricao: "noções básicas de design, como disposição dos elementos e apelo estético" },
+        { id: 3, nome: "Facilidade de Uso", descricao: "processo de produção simplificado e ágil, como a disposição dos elementos e ferramentas úteis para o usuário" },
+        { id: 4, nome: "Gratuidade", descricao: "" }
       ],
       selected: undefined
     };
@@ -68,6 +70,12 @@ export default {
     app_selectCriterio(index) {
       this.selected = this.criterios[index];
       EventBus.$emit("CriterioSelected", this.selected.id);
+    },
+    app_mouseOverCriterio(index) {
+      EventBus.$emit("CriterioMouseOver", this.criterios[index].descricao);
+    },
+    app_mouseLeaveCriterio() {
+      EventBus.$emit("CriterioMouseLeave");
     }
   }
 };

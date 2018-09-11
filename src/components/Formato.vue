@@ -20,7 +20,9 @@
         <v-list-tile 
           :disabled="criterio===undefined"
           ripple
-          @click="app_selectFormato(index)">
+          @click="app_selectFormato(index)"
+          @mouseover.prevent.stop="app_mouseOverFormato(index)"
+          @mouseleave.prevent.stop="app_mouseLeaveFormato()">
 
           <v-list-tile-content>
             <v-list-tile-title v-text="formato.nome"/>
@@ -45,8 +47,8 @@ export default {
       enfase: undefined,
       criterio: undefined,
       formatos: [
-        { id: 1, nome: "Digital" },
-        { id: 2, nome: "Multimidiástico" }
+        { id: 1, nome: "Digital", descricao: "material estático produzido através de ferramentas online, para impressão ou utilização em mídias digitais" },
+        { id: 2, nome: "Multimidiástico", descricao: "permite a interação com o usuário, a exploração de hipertextos, a sonoridade, realidade aumentada" }
       ],
       selected: undefined
     };
@@ -71,6 +73,12 @@ export default {
     app_selectFormato(index) {
       this.selected = this.formatos[index];
       EventBus.$emit("FormatoSelected", this.selected.id);
+    },
+    app_mouseOverFormato(index) {
+      EventBus.$emit("FormatoMouseOver", this.formatos[index].descricao);
+    },
+    app_mouseLeaveFormato() {
+      EventBus.$emit("FormatoMouseLeave");
     }
   }
 };

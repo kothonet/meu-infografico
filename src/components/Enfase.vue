@@ -19,7 +19,9 @@
 
         <v-list-tile 
           ripple
-          @click="app_selectEnfase(index)">
+          @click.prevent.stop="app_selectEnfase(index)"
+          @mouseover.prevent.stop="app_mouseOverEnfase(index)"
+          @mouseleave.prevent.stop="app_mouseLeaveEnfase()">
 
           <v-list-tile-content>
             <v-list-tile-title v-text="enfase.nome"/>
@@ -43,12 +45,12 @@ export default {
   data() {
     return {
       enfases: [
-        { id: 1, nome: "Conteúdo Textual" },
-        { id: 2, nome: "Gráficos" },
-        { id: 3, nome: "Mapas" },
-        { id: 4, nome: "Ícones" },
-        { id: 5, nome: "Fotos" },
-        { id: 6, nome: "Vídeos" }
+        { id: 1, nome: "Conteúdo Textual", descricao: "parte escrita, com suas opções de fontes, corpo, cores, blocos serem modificados, espaçamento, negrito, itálico" },
+        { id: 2, nome: "Gráficos", descricao: "diagramas, esquemas e suas variações, como wireframes, sitemaps, networks" },
+        { id: 3, nome: "Mapas", descricao: "localizações geográficas" },
+        { id: 4, nome: "Ícones", descricao: "ilustrações, desenhos e formas" },
+        { id: 5, nome: "Fotos", descricao: "" },
+        { id: 6, nome: "Vídeos", descricao: "" }
       ],
       selected: undefined
     };
@@ -57,6 +59,12 @@ export default {
     app_selectEnfase(index) {
       this.selected = this.enfases[index];
       EventBus.$emit("EnfaseSelected", this.selected.id);
+    },
+    app_mouseOverEnfase(index) {
+      EventBus.$emit("EnfaseMouseOver", this.enfases[index].descricao);
+    },
+    app_mouseLeaveEnfase() {
+      EventBus.$emit("EnfaseMouseLeave");
     }
   }
 };
