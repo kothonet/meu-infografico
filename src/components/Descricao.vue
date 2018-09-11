@@ -4,11 +4,13 @@
     class="hidden-md-and-down" 
     lg4>
 
-    <v-card v-if="showDescricao">
-      <v-card-title>
-        {{ mensagem }}
-      </v-card-title>
-    </v-card>
+    <v-fade-transition>
+
+      <v-card v-if="showDescricao">
+        <v-card-title>{{ mensagem }}</v-card-title>
+      </v-card>
+
+    </v-fade-transition>
           
   </v-flex>
     
@@ -66,9 +68,20 @@ export default {
   }
 };
 </script>
- <style scoped> 
- .v-card__title {
-     font-size: 20px;
- }
- </style>
+<style scoped> 
+.v-card {
+    min-height: 300px;
+}
+
+.v-card__title {
+    font-size: 20px;
+    position: absolute;
+    vertical-align: middle;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    padding: 50px;
+    display: grid;
+}
+</style>
  

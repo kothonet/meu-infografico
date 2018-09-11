@@ -10,27 +10,32 @@
       dark>
 
       <v-toolbar-title>Ferramentas</v-toolbar-title>
-
     </v-toolbar>
-    <v-list two-line>
-      <div 
-        v-for="(ferramenta, index) in availableFerramentas" 
-        :key="ferramenta.id">
 
-        <v-list-tile @click.prevent.stop="app_selectFerramenta(index)">
-          <v-list-tile-content>
-            <v-list-tile-title 
-              @mouseover.prevent.stop="app_mouseover(index)" 
-              @mouseleave.prevent.stop="app_mouseleave(index)"
-              v-text="ferramenta.nome"/>
-          </v-list-tile-content>
-        </v-list-tile>
-        <v-divider v-if="index < availableFerramentas.length-1"/>
-      </div>
-    </v-list>
-          
+    <v-scale-transition 
+      group 
+      tag="v-list">
+      
+      <template 
+        v-for="(ferramenta, index) in availableFerramentas">
+
+        <div 
+          :key="ferramenta.id"
+          class="v-list--two-line">
+
+          <v-list-tile @click.prevent.stop="app_selectFerramenta(index)" >
+            <v-list-tile-content>
+              <v-list-tile-title 
+                @mouseover.prevent.stop="app_mouseover(index)" 
+                @mouseleave.prevent.stop="app_mouseleave(index)"
+                v-text="ferramenta.nome"/>
+            </v-list-tile-content>
+          </v-list-tile>
+          <v-divider v-if="index < availableFerramentas.length-1" />
+        </div>
+      </template>
+    </v-scale-transition>
   </v-flex>
-    
 </template>
 
 <script>
