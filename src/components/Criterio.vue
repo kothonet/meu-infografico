@@ -1,24 +1,40 @@
 <template>
 
-    <v-flex xs2>
+  <v-flex 
+    xs12 
+    sm6
+    lg2>
 
-      <v-toolbar color="criterio" dark>
-        <v-toolbar-title>Critérios</v-toolbar-title>
-      </v-toolbar>
-      <v-list two-line>
-        <div v-for="(criterio, index) in criterios" :key="criterio.id">
-          <v-list-tile @click="selectCriterio(index)" :disabled="enfase===undefined" ripple>
-            <v-list-tile-content>
-              <v-list-tile-title v-text="criterio.nome"></v-list-tile-title>
-            </v-list-tile-content>
-            <v-list-tile-avatar v-if="criterio===selected"><v-icon>checked</v-icon></v-list-tile-avatar>
-          </v-list-tile>
-          <v-divider v-if="index < criterios.length-1"></v-divider>
-        </div>
-      </v-list>
-            
-    </v-flex>
-    
+    <v-toolbar 
+      color="criterio" 
+      dark>
+
+      <v-toolbar-title>Critérios</v-toolbar-title>
+
+    </v-toolbar>
+    <v-list two-line>
+      <div 
+        v-for="(criterio, index) in criterios" 
+        :key="criterio.id">
+
+        <v-list-tile 
+          :disabled="enfase===undefined" 
+          ripple
+          @click="app_selectCriterio(index)">
+
+          <v-list-tile-content>
+            <v-list-tile-title v-text="criterio.nome"/>
+          </v-list-tile-content>
+          <v-list-tile-avatar v-if="criterio===selected"><v-icon>checked</v-icon></v-list-tile-avatar>
+
+        </v-list-tile>
+        <v-divider v-if="index < criterios.length-1"/>
+
+      </div>
+    </v-list>
+          
+  </v-flex>
+  
 </template>
 
 <script>
@@ -38,15 +54,6 @@ export default {
       selected: undefined
     };
   },
-  methods: {
-    selectCriterio(index) {
-      this.selected = this.criterios[index];
-      EventBus.$emit("CriterioSelected", this.selected.id);
-    },
-    selectEnfase(id) {
-      this.enfase = id;
-    }
-  },
   mounted() {
     var _self = this;
     EventBus.$on("EnfaseSelected", function(payload) {
@@ -56,6 +63,12 @@ export default {
   },
   unmounted() {
     EventBus.$off("EnfaseSelected");
+  },
+  methods: {
+    app_selectCriterio(index) {
+      this.selected = this.criterios[index];
+      EventBus.$emit("CriterioSelected", this.selected.id);
+    }
   }
 };
 </script>

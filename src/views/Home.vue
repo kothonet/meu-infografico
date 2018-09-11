@@ -1,41 +1,35 @@
 <template>
-  <v-container fluid>
-      <v-layout column>
-        <v-flex xs12>
-          <v-layout row>
+  <v-layout 
+    row 
+    xs12
+    wrap
+    class="mx-5">
 
-            <enfase class="item"></enfase>
-            <criterio class="item"></criterio>
-            <formato class="item"></formato>
-            <ferramenta class="item"></ferramenta>
+    <enfase />
+    <criterio />
+    <formato />
+    <ferramenta />
 
-          </v-layout>
-        </v-flex>
-      </v-layout>
-  </v-container>
+  </v-layout>
 </template>
 
 <script>
-import Enfase from '../components/Enfase.vue';
-import Criterio from '../components/Criterio.vue';
-import Formato from '../components/Formato.vue';
-import Ferramenta from '../components/Ferramenta.vue';
+import Enfase from "../components/Enfase.vue";
+import Criterio from "../components/Criterio.vue";
+import Formato from "../components/Formato.vue";
+import Ferramenta from "../components/Ferramenta.vue";
 
 export default {
   components: {
-    'enfase': Enfase,
-    'criterio': Criterio,
-    'formato': Formato,
-    'ferramenta': Ferramenta
+    enfase: Enfase,
+    criterio: Criterio,
+    formato: Formato,
+    ferramenta: Ferramenta
   }
 };
 </script>
 
 <style>
-.item {
-  margin: 10px;
-}
-
 .layout.column {
   margin-left: 50px;
 }

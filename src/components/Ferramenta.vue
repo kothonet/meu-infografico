@@ -1,20 +1,31 @@
 <template>
 
-  <v-flex xs2>
+  <v-flex 
+    xs12 
+    sm6
+    lg2>
 
-    <v-toolbar color="ferramenta" dark>
+    <v-toolbar 
+      color="ferramenta" 
+      dark>
+
       <v-toolbar-title>Ferramentas</v-toolbar-title>
+
     </v-toolbar>
     <v-list two-line>
-      <div v-for="(ferramenta, index) in availableFerramentas" :key="ferramenta.id">
-      <v-list-tile @click.prevent.stop="selectferramenta(index)">
-        <v-list-tile-content>
-          <v-list-tile-title v-text="ferramenta.nome"  
-                  @mouseover.prevent.stop="app_mouseover(index)" 
-                  @mouseleave.prevent.stop="app_mouseleave(index)"></v-list-tile-title>
-        </v-list-tile-content>
-      </v-list-tile>
-      <v-divider v-if="index < ferramentas.length-1"></v-divider>
+      <div 
+        v-for="(ferramenta, index) in availableFerramentas" 
+        :key="ferramenta.id">
+
+        <v-list-tile @click.prevent.stop="app_selectFerramenta(index)">
+          <v-list-tile-content>
+            <v-list-tile-title 
+              @mouseover.prevent.stop="app_mouseover(index)" 
+              @mouseleave.prevent.stop="app_mouseleave(index)"
+              v-text="ferramenta.nome"/>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-divider v-if="index < availableFerramentas.length-1"/>
       </div>
     </v-list>
           
@@ -150,16 +161,6 @@ export default {
       availableFerramentas: []
     };
   },
-  methods: {
-    selectferramenta(index) {
-        EventBus.$emit("FerramentaSelected", this.ferramentas[index].id);
-    },
-    app_mouseover(index) {
-      console.log(this.availableFerramentas[index].url);
-    },
-    app_mouseleave(index) {
-    }
-  },
   mounted() {
     var _self = this;
     EventBus.$on("EnfaseSelected", function(payload) {
@@ -192,6 +193,17 @@ export default {
     EventBus.$off("EnfaseSelected");
     EventBus.$off("CriterioSelected");
     EventBus.$off("FormatoSelected");
+  },
+  methods: {
+    app_selectFerramenta(index) {
+        EventBus.$emit("FerramentaSelected", this.ferramentas[index].id);
+    },
+    app_mouseover(index) {
+      console.log(this.availableFerramentas[index].url);
+    },
+    app_mouseleave(index) {
+      console.log(this.availableFerramentas[index].url);
+    }
   }
 };
 </script>

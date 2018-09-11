@@ -1,23 +1,37 @@
 <template>
 
-    <v-flex xs2>
+  <v-flex 
+    xs12 
+    sm6
+    lg2>
 
-      <v-toolbar color="enfase" dark>
-        <v-toolbar-title>Ênfases</v-toolbar-title>
-      </v-toolbar>
-      <v-list two-line>
-        <div v-for="(enfase, index) in enfases" :key="enfase.id">
-          <v-list-tile @click="selectEnfase(index)" ripple>
-            <v-list-tile-content>
-              <v-list-tile-title v-text="enfase.nome"></v-list-tile-title>
-            </v-list-tile-content>
-            <v-list-tile-avatar v-if="enfase===selected"><v-icon>checked</v-icon></v-list-tile-avatar>
-          </v-list-tile>
-          <v-divider v-if="index < enfases.length-1"></v-divider>
-        </div>
-      </v-list>
-            
-    </v-flex>
+    <v-toolbar 
+      color="enfase" 
+      dark>
+
+      <v-toolbar-title>Ênfases</v-toolbar-title>
+
+    </v-toolbar>
+    <v-list two-line>
+      <div 
+        v-for="(enfase, index) in enfases" 
+        :key="enfase.id">
+
+        <v-list-tile 
+          ripple
+          @click="app_selectEnfase(index)">
+
+          <v-list-tile-content>
+            <v-list-tile-title v-text="enfase.nome"/>
+          </v-list-tile-content>
+          <v-list-tile-avatar v-if="enfase===selected"><v-icon>checked</v-icon></v-list-tile-avatar>
+        </v-list-tile>
+        <v-divider v-if="index < enfases.length-1"/>
+
+      </div>
+    </v-list>
+          
+  </v-flex>
     
 </template>
 
@@ -40,7 +54,7 @@ export default {
     };
   },
   methods:{
-    selectEnfase(index) {
+    app_selectEnfase(index) {
       this.selected = this.enfases[index];
       EventBus.$emit("EnfaseSelected", this.selected.id);
     }
