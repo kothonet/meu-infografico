@@ -12,7 +12,7 @@
       <v-toolbar-title>Ferramentas</v-toolbar-title>
     </v-toolbar>
 
-    <v-scale-transition 
+    <v-scroll-y-transition 
       group 
       tag="v-list">
       
@@ -25,16 +25,13 @@
 
           <v-list-tile @click.prevent.stop="app_selectFerramenta(index)" >
             <v-list-tile-content>
-              <v-list-tile-title 
-                @mouseover.prevent.stop="app_mouseover(index)" 
-                @mouseleave.prevent.stop="app_mouseleave(index)"
-                v-text="ferramenta.nome"/>
+              <v-list-tile-title v-text="ferramenta.nome"/>
             </v-list-tile-content>
           </v-list-tile>
           <v-divider v-if="index < availableFerramentas.length-1" />
         </div>
       </template>
-    </v-scale-transition>
+    </v-scroll-y-transition>
   </v-flex>
 </template>
 
@@ -201,13 +198,7 @@ export default {
   },
   methods: {
     app_selectFerramenta(index) {
-        EventBus.$emit("FerramentaSelected", this.ferramentas[index].id);
-    },
-    app_mouseover(index) {
-      console.log(this.availableFerramentas[index].url);
-    },
-    app_mouseleave(index) {
-      console.log(this.availableFerramentas[index].url);
+        EventBus.$emit("FerramentaSelected", this.availableFerramentas[index].url);
     }
   }
 };

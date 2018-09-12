@@ -57,13 +57,11 @@
             </v-list-tile>
           </v-list>
         </v-navigation-drawer>
-        <transition 
-          name="fade" 
-          mode="out-in">
+        <v-fade-transition leave-absolute>
 
           <router-view />
 
-        </transition>
+        </v-fade-transition>
       </v-container>
     </v-content>
     
@@ -111,7 +109,7 @@ export default {
   background: '#e6e7e8';
 }
 
-.fade-enter-active,
+/* .fade-enter-active,
 .fade-leave-active {
   transition-duration: 0.2s;
   transition-property: opacity;
@@ -122,7 +120,7 @@ export default {
 .fade-leave-active {
   opacity: 0
 }
-
+ */
 h3,
 p {
   font-size: 20px !important;
