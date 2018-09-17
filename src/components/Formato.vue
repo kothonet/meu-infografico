@@ -14,8 +14,8 @@
     </v-toolbar>
     <v-list two-line>
       <div 
-        v-for="(formato, index) in formatos" 
-        :key="formato.id">
+        v-for="(for_formato, index) in formatos" 
+        :key="for_formato.id">
 
         <v-list-tile 
           :disabled="criterio===undefined"
@@ -25,9 +25,9 @@
           @mouseleave.prevent.stop="app_mouseLeaveFormato()">
 
           <v-list-tile-content>
-            <v-list-tile-title v-text="formato.nome"/>
+            <v-list-tile-title v-text="for_formato.nome"/>
           </v-list-tile-content>
-          <v-list-tile-avatar v-if="formato===selected"><v-icon>checked</v-icon></v-list-tile-avatar>
+          <v-list-tile-avatar v-if="formato !== undefined && for_formato.id===formato.id"><v-icon>checked</v-icon></v-list-tile-avatar>
         </v-list-tile>
         <v-divider v-if="index < formatos.length-1"/>
       </div>
@@ -44,35 +44,23 @@ export default {
   name: "Formato",
   data() {
     return {
-      enfase: undefined,
-      criterio: undefined,
       formatos: [
         { id: 1, nome: "Digital", descricao: "material estático produzido através de ferramentas online, para impressão ou utilização em mídias digitais" },
-        { id: 2, nome: "Multimidiástico", descricao: "permite a interação com o usuário, a exploração de hipertextos, a sonoridade, realidade aumentada" }
-      ],
-      selected: undefined
+        { id: 2, nome: "Multimidiático", descricao: "permite a interação com o usuário, a exploração de hipertextos, a sonoridade, realidade aumentada" }
+      ]
     };
   },
-  mounted() {
-    var _self = this;
-    EventBus.$on("EnfaseSelected", function(payload) {
-      _self.enfase = payload;
-        _self.criterio = undefined;
-        _self.selected = undefined;
-    });
-    EventBus.$on("CriterioSelected", function(payload) {
-      _self.criterio = payload;
-        _self.selected = undefined;
-    });
-  },
-  unmounted() {
-    EventBus.$off("EnfaseSelected");
-    EventBus.$off("CriterioSelected");
+  computed: {
+      criterio() {
+        return this.$store.state.criterio;
+      },
+      formato() {
+        return this.$store.state.formato;
+      }
   },
   methods: {
     app_selectFormato(index) {
-      this.selected = this.formatos[index];
-      EventBus.$emit("FormatoSelected", this.selected.id);
+      this.$store.commit('SET_FORMATO', this.formatos[index]);
     },
     app_mouseOverFormato(index) {
       EventBus.$emit("FormatoMouseOver", this.formatos[index].descricao);

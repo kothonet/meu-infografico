@@ -17,15 +17,15 @@
       tag="v-list">
       
       <template 
-        v-for="(ferramenta, index) in availableFerramentas">
+        v-for="(for_ferramenta, index) in availableFerramentas">
 
         <div 
-          :key="ferramenta.id"
+          :key="for_ferramenta.id"
           class="v-list--two-line">
 
           <v-list-tile @click.prevent.stop="app_selectFerramenta(index)" >
             <v-list-tile-content>
-              <v-list-tile-title v-text="ferramenta.nome"/>
+              <v-list-tile-title v-text="for_ferramenta.nome"/>
             </v-list-tile-content>
           </v-list-tile>
           <v-divider v-if="index < availableFerramentas.length-1" />
@@ -42,9 +42,6 @@ export default {
   name: "Ferramenta",
   data() {
     return {
-      enfase: undefined,
-      criterio: undefined,
-      formato: undefined,
       ferramentas: [
         {
           id: 1,
@@ -159,42 +156,36 @@ export default {
             {enfase:6,criterio:4,formato:2}
           ]
         }
-      ],
-      availableFerramentas: []
+      ]
     };
   },
-  mounted() {
-    var _self = this;
-    EventBus.$on("EnfaseSelected", function(payload) {
-      _self.enfase = payload;
-      _self.availableFerramentas = [];
+  computed: {
+      enfase() {return this.$store.state.enfase},
+      criterio() {return this.$store.state.criterio},
+      formato() {return this.$store.state.formato},
+      availableFerramentas() {
+        var _ferramentas = [];
+        var _self = this;
+        if (_self.enfase !== undefined && 
+          _self.criterio !== undefined && 
+          _self.formato !== undefined) {
 
-      _self.criterio = undefined;
-      _self.selected = undefined;
-    });
-    EventBus.$on("CriterioSelected", function(payload) {
-      _self.criterio = payload;
-      _self.availableFerramentas = [];
+          this.ferramentas.forEach(function(ferramenta) {
 
-      _self.selected = undefined;
-    });
-    EventBus.$on("FormatoSelected", function(payload) {
-      _self.formato = payload;
-      _self.availableFerramentas = [];
-
-      _self.ferramentas.forEach(function(ferramenta) {
-        ferramenta.selecao.forEach(function(_selecao) {
-          if(_self.enfase === _selecao.enfase && _self.criterio === _selecao.criterio && _self.formato === _selecao.formato) {
-            _self.availableFerramentas.push(ferramenta);
-          }
-        });
-      });
-    });
-  },
-  unmounted() {
-    EventBus.$off("EnfaseSelected");
-    EventBus.$off("CriterioSelected");
-    EventBus.$off("FormatoSelected");
+            ferramenta.selecao.forEach(function(_selecao) {
+              
+              if(_self.enfase.id === _selecao.enfase && 
+                _self.criterio.id === _selecao.criterio && 
+                _self.formato.id === _selecao.formato) {
+                
+                _ferramentas.push(ferramenta);
+              }
+            });
+          });
+        } 
+        
+        return _ferramentas;
+      }
   },
   methods: {
     app_selectFerramenta(index) {

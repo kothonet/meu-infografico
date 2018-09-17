@@ -14,8 +14,8 @@
     </v-toolbar>
     <v-list two-line>
       <div 
-        v-for="(criterio, index) in criterios" 
-        :key="criterio.id">
+        v-for="(for_criterio, index) in criterios" 
+        :key="for_criterio.id">
 
         <v-list-tile 
           :disabled="enfase===undefined" 
@@ -25,9 +25,9 @@
           @mouseleave.prevent.stop="app_mouseLeaveCriterio()">
 
           <v-list-tile-content>
-            <v-list-tile-title v-text="criterio.nome"/>
+            <v-list-tile-title v-text="for_criterio.nome"/>
           </v-list-tile-content>
-          <v-list-tile-avatar v-if="criterio===selected"><v-icon>checked</v-icon></v-list-tile-avatar>
+          <v-list-tile-avatar v-if="criterio !== undefined && for_criterio.id===criterio.id"><v-icon>checked</v-icon></v-list-tile-avatar>
 
         </v-list-tile>
         <v-divider v-if="index < criterios.length-1"/>
@@ -46,30 +46,25 @@ export default {
   name: "Criterio",
   data() {
     return {
-      enfase: undefined,
       criterios: [
-        { id: 1, nome: "Qtd. de Modelos", descricao: "infográficos já elaborados e compartilhados online, que servem como referência e podem ser manipulados" },
-        { id: 2, nome: "Impacto Visual", descricao: "noções básicas de design, como disposição dos elementos e apelo estético" },
-        { id: 3, nome: "Facilidade de Uso", descricao: "processo de produção simplificado e ágil, como a disposição dos elementos e ferramentas úteis para o usuário" },
+        { id: 1, nome: "Qtd. de modelos", descricao: "infográficos já elaborados e compartilhados online, que servem como referência e podem ser manipulados" },
+        { id: 2, nome: "Impacto visual", descricao: "noções básicas de design, como disposição dos elementos e apelo estético" },
+        { id: 3, nome: "Facilidade de uso", descricao: "processo de produção simplificado e ágil, como a disposição dos elementos e ferramentas úteis para o usuário" },
         { id: 4, nome: "Gratuidade", descricao: "" }
-      ],
-      selected: undefined
+      ]
     };
   },
-  mounted() {
-    var _self = this;
-    EventBus.$on("EnfaseSelected", function(payload) {
-      _self.enfase = payload;
-      _self.selected = undefined;
-    })
-  },
-  unmounted() {
-    EventBus.$off("EnfaseSelected");
+  computed: {
+      enfase() {
+        return this.$store.state.enfase;
+      },
+      criterio() {
+        return this.$store.state.criterio;
+      }
   },
   methods: {
     app_selectCriterio(index) {
-      this.selected = this.criterios[index];
-      EventBus.$emit("CriterioSelected", this.selected.id);
+      this.$store.commit('SET_CRITERIO', this.criterios[index])
     },
     app_mouseOverCriterio(index) {
       EventBus.$emit("CriterioMouseOver", this.criterios[index].descricao);
