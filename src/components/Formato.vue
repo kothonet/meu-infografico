@@ -14,20 +14,20 @@
     </v-toolbar>
     <v-list two-line>
       <div 
-        v-for="(for_formato, index) in formatos" 
-        :key="for_formato.id">
+        v-for="(formato, index) in formatos" 
+        :key="formato.id">
 
         <v-list-tile 
-          :disabled="criterio===undefined"
+          :disabled="$store.getters.criterio===undefined"
           ripple
           @click="app_selectFormato(index)"
           @mouseover.prevent.stop="app_mouseOverFormato(index)"
           @mouseleave.prevent.stop="app_mouseLeaveFormato()">
 
           <v-list-tile-content>
-            <v-list-tile-title v-text="for_formato.nome"/>
+            <v-list-tile-title v-text="formato.nome"/>
           </v-list-tile-content>
-          <v-list-tile-avatar v-if="formato !== undefined && for_formato.id===formato.id"><v-icon>checked</v-icon></v-list-tile-avatar>
+          <v-list-tile-avatar v-if="$store.getters.formato !== undefined && formato.id===$store.getters.formato.id"><v-icon>checked</v-icon></v-list-tile-avatar>
         </v-list-tile>
         <v-divider v-if="index < formatos.length-1"/>
       </div>
@@ -50,17 +50,9 @@ export default {
       ]
     };
   },
-  computed: {
-      criterio() {
-        return this.$store.state.criterio;
-      },
-      formato() {
-        return this.$store.state.formato;
-      }
-  },
   methods: {
     app_selectFormato(index) {
-      this.$store.commit('SET_FORMATO', this.formatos[index]);
+      this.$store.dispatch('set_formato', this.formatos[index]);
     },
     app_mouseOverFormato(index) {
       EventBus.$emit("FormatoMouseOver", this.formatos[index].descricao);

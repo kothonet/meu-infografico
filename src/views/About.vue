@@ -27,9 +27,6 @@
     <p>
       email <a href="mailto:marcusdomiciano@gmail.com">marcusdomiciano@gmail.com</a>
     </p>
-    <p>
-      telefone (14) 98111-7872
-    </p>
   </div>
 </template>
 

@@ -17,15 +17,15 @@
       tag="v-list">
       
       <template 
-        v-for="(for_ferramenta, index) in availableFerramentas">
+        v-for="(ferramenta, index) in availableFerramentas">
 
         <div 
-          :key="for_ferramenta.id"
+          :key="ferramenta.id"
           class="v-list--two-line">
 
           <v-list-tile @click.prevent.stop="app_selectFerramenta(index)" >
             <v-list-tile-content>
-              <v-list-tile-title v-text="for_ferramenta.nome"/>
+              <v-list-tile-title v-text="ferramenta.nome"/>
             </v-list-tile-content>
           </v-list-tile>
           <v-divider v-if="index < availableFerramentas.length-1" />
@@ -160,23 +160,20 @@ export default {
     };
   },
   computed: {
-      enfase() {return this.$store.state.enfase},
-      criterio() {return this.$store.state.criterio},
-      formato() {return this.$store.state.formato},
       availableFerramentas() {
         var _ferramentas = [];
         var _self = this;
-        if (_self.enfase !== undefined && 
-          _self.criterio !== undefined && 
-          _self.formato !== undefined) {
+        if (_self.$store.getters.enfase !== undefined && 
+          _self.$store.getters.criterio !== undefined && 
+          _self.$store.getters.formato !== undefined) {
 
           this.ferramentas.forEach(function(ferramenta) {
 
             ferramenta.selecao.forEach(function(_selecao) {
               
-              if(_self.enfase.id === _selecao.enfase && 
-                _self.criterio.id === _selecao.criterio && 
-                _self.formato.id === _selecao.formato) {
+              if(_self.$store.getters.enfase.id === _selecao.enfase && 
+                _self.$store.getters.criterio.id === _selecao.criterio && 
+                _self.$store.getters.formato.id === _selecao.formato) {
                 
                 _ferramentas.push(ferramenta);
               }
@@ -189,7 +186,8 @@ export default {
   },
   methods: {
     app_selectFerramenta(index) {
-        EventBus.$emit("FerramentaSelected", this.availableFerramentas[index].url);
+      this.$store.dispatch("set_ferramenta", this.availableFerramentas[index]);
+      EventBus.$emit("FerramentaSelected");
     }
   }
 };

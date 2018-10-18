@@ -69,6 +69,9 @@
 </template>
 
 <script>
+import { db } from './firestore';
+import axios from 'axios';
+
 export default {
   name: 'App',
   data () {
@@ -95,6 +98,28 @@ export default {
       title: 'Meu Infográfico'
     }
   },
+  firestore() {
+    return {
+      access: db.collection('access')
+    }
+  },
+  mounted() {
+    /*
+    $.getJSON('http://ipinfo.io', function(data){
+      console.log(data);
+    });
+    */
+    axios.get('http://ipinfo.io').then(response => {
+      this.$firestore.access.add( 
+        {
+          date: new Date(), 
+          ip: response.data.ip, 
+          country: response.data.country, 
+          state: response.data.region, 
+          city: response.data.city 
+        });
+    });
+  },
   methods: {
     clickItem: function(_item) {
       this.$router.push(_item);
@@ -109,18 +134,6 @@ export default {
   background: '#e6e7e8';
 }
 
-/* .fade-enter-active,
-.fade-leave-active {
-  transition-duration: 0.2s;
-  transition-property: opacity;
-  transition-timing-function: ease;
-}
-
-.fade-enter,
-.fade-leave-active {
-  opacity: 0
-}
- */
 h3,
 p {
   font-size: 20px !important;

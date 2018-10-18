@@ -4,7 +4,7 @@
     width="400px">
 
     <link-prevue 
-      :url="app_url" />
+      :url="$store.getters.ferramenta === undefined ? undefined : $store.getters.ferramenta.url" />
 
   </v-dialog>
 </template>
@@ -20,15 +20,13 @@ export default {
   },
   data() {
     return {
-      app_url: "http://www.google.com.br",
       showPreview: false
     };
   },
   mounted() {
     var _self = this;
-    EventBus.$on("FerramentaSelected", function(payload) {
-      _self.app_url = payload;
-      _self.showPreview = true;
+    EventBus.$on("FerramentaSelected", function() {
+      _self.showPreview = _self.$store.getters.ferramenta !== undefined
     });
   },
   unmounted() {
