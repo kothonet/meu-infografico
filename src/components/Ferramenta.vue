@@ -32,6 +32,12 @@
         </div>
       </template>
     </v-scroll-y-transition>
+
+    <v-btn
+      v-if="this.$store.getters.enfase !== undefined || this.$store.getters.criterio !== undefined || this.$store.getters.formato !== undefined"
+      dark 
+      class="btn-try-again"
+      @click.prevent.stop="app_try_again()">Tentar Novamente</v-btn>
   </v-flex>
 </template>
 
@@ -55,7 +61,7 @@ export default {
         {
           id: 2,
           nome: 'CANVA',
-          url: "https://www.canva.com",
+          url: "https://www.canva.com/pt_br",
           selecao: [
             {enfase:1,criterio:1,formato:1},
             {enfase:1,criterio:2,formato:1},
@@ -188,7 +194,23 @@ export default {
     app_selectFerramenta(index) {
       this.$store.dispatch("set_ferramenta", this.availableFerramentas[index]);
       EventBus.$emit("FerramentaSelected");
+    },
+    app_try_again() {
+      this.$store.dispatch('set_enfase', undefined);
+      this.$store.dispatch('set_criterio', undefined);
+      this.$store.dispatch('set_formato', undefined);
     }
   }
 };
 </script>
+
+<style scoped>
+.btn-try-again {
+  border-radius: 5px;
+  height: 64px;
+  width: 100%;
+  margin: 0;
+  background-color: #f3511e !important;
+}
+
+</style>

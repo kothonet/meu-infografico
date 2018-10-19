@@ -18,7 +18,7 @@
         :key="formato.id">
 
         <v-list-tile 
-          :disabled="$store.getters.criterio===undefined"
+          :disabled="$store.getters.criterio===undefined || $store.getters.formato!==undefined"
           ripple
           @click="app_selectFormato(index)"
           @mouseover.prevent.stop="app_mouseOverFormato(index)"

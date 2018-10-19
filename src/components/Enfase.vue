@@ -18,6 +18,7 @@
         :key="enfase.id">
 
         <v-list-tile 
+          :disabled="$store.getters.enfase!==undefined"
           ripple
           @click.prevent.stop="app_selectEnfase(index)"
           @mouseover.prevent.stop="app_mouseOverEnfase(index)"

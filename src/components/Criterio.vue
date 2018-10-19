@@ -18,7 +18,7 @@
         :key="criterio.id">
 
         <v-list-tile 
-          :disabled="$store.getters.enfase===undefined" 
+          :disabled="$store.getters.enfase===undefined || $store.getters.criterio!==undefined" 
           ripple
           @click="app_selectCriterio(index)"
           @mouseover.prevent.stop="app_mouseOverCriterio(index)"

@@ -134,6 +134,10 @@ export default {
   background: '#e6e7e8';
 }
 
+.v-toolbar {
+  border-radius: 5px;
+}
+
 h3,
 p {
   font-size: 20px !important;
