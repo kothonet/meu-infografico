@@ -8,7 +8,7 @@
       dark
     >
       <v-toolbar-side-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title v-text="title" />
+      <v-toolbar-title v-text="'meuinfografico.com'" />
       <v-spacer />
       <v-btn 
         v-for="(item, i) in items" 
@@ -65,6 +65,65 @@
       </v-container>
     </v-content>
     
+    <v-footer height="auto">
+      <v-card
+        flat
+        tile
+        class="lighten-1 text-xs-center" 
+        width="100%">
+        
+        <v-card-text class="pt-0 pb-0">
+          <a 
+            rel="license" 
+            href="http://creativecommons.org/licenses/by/4.0/">
+            <img 
+              alt="Licença Creative Commons" 
+              style="border-width:0" 
+              src="https://i.creativecommons.org/l/by/4.0/88x31.png">
+          </a>
+        </v-card-text>
+
+        <v-card-text class="pt-0 pb-0">
+          <span 
+            xmlns:dct="http://purl.org/dc/terms/" 
+            property="dct:title">meuinfografico.com</span>
+            
+          de 
+            
+          <a 
+            xmlns:cc="http://creativecommons.org/ns#" 
+            href="https://meuinfografico.com/" 
+            property="cc:attributionName" 
+            rel="cc:attributionURL">
+            
+            Marcus Aurelius Lopes Domiciano
+          </a>
+              
+          está licenciado com uma Licença 
+          
+          <a 
+            rel="license" 
+            href="http://creativecommons.org/licenses/by/4.0/">
+            
+            Creative Commons - Atribuição 4.0 Internacional
+          </a>
+          
+          .
+          
+          <br>
+          
+          Baseado no trabalho disponível em 
+          
+          <a 
+            xmlns:dct="http://purl.org/dc/terms/" 
+            href="https://repositorio.unesp.br/handle/11449/152630" 
+            rel="dct:source">
+            
+            https://repositorio.unesp.br/handle/11449/152630
+          </a>
+        </v-card-text>
+      </v-card>
+    </v-footer>
   </v-app>
 </template>
 
@@ -93,9 +152,7 @@ export default {
           title: 'Ajuda',
           route: '/help'
         }
-      ],
-      miniVariant: false,
-      title: 'Meu Infográfico'
+      ]
     }
   },
   firestore() {
@@ -104,12 +161,7 @@ export default {
     }
   },
   mounted() {
-    /*
-    $.getJSON('http://ipinfo.io', function(data){
-      console.log(data);
-    });
-    */
-    axios.get('http://ipinfo.io').then(response => {
+    axios.get('https://ipinfo.io').then(response => {
       this.$firestore.access.add( 
         {
           date: new Date(), 
@@ -117,7 +169,7 @@ export default {
           country: response.data.country, 
           state: response.data.region, 
           city: response.data.city 
-        });
+        }); 
     });
   },
   methods: {
@@ -134,7 +186,10 @@ export default {
   background: '#e6e7e8';
 }
 
-.v-toolbar {
+.enfase,
+.criterio,
+.formato, 
+.ferramenta {
   border-radius: 5px;
 }
 
@@ -151,6 +206,9 @@ h1 {
   font-size: 36px;
 }
 
+.v-toolbar.disabled {
+    filter: brightness(75%);
+}
 </style>
 
 <style scoped>

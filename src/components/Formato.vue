@@ -6,6 +6,7 @@
     lg2>
 
     <v-toolbar 
+      :class="$store.getters.criterio===undefined ? 'disabled' : ''"
       color="formato" 
       dark>
 
@@ -55,7 +56,7 @@ export default {
       this.$store.dispatch('set_formato', this.formatos[index]);
     },
     app_mouseOverFormato(index) {
-      EventBus.$emit("FormatoMouseOver", this.formatos[index].descricao);
+      EventBus.$emit("FormatoMouseOver", this.formatos[index]);
     },
     app_mouseLeaveFormato() {
       EventBus.$emit("FormatoMouseLeave");

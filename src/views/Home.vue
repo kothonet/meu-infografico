@@ -10,7 +10,6 @@
     <formato />
     <ferramenta />
     <descricao />
-    <preview />
 
   </v-layout>
 </template>
@@ -21,7 +20,6 @@ import Criterio from "../components/Criterio.vue";
 import Formato from "../components/Formato.vue";
 import Ferramenta from "../components/Ferramenta.vue";
 import Descricao from "../components/Descricao.vue";
-import Preview from "../components/Preview.vue";
 
 export default {
   components: {
@@ -29,8 +27,7 @@ export default {
     Criterio,
     Formato,
     Ferramenta,
-    Descricao,
-    Preview
+    Descricao
   }
 };
 </script>

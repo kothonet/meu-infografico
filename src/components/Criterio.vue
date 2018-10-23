@@ -6,6 +6,7 @@
     lg2>
 
     <v-toolbar 
+      :class="$store.getters.enfase===undefined ? 'disabled' : ''"
       color="criterio" 
       dark>
 
@@ -59,7 +60,7 @@ export default {
       this.$store.dispatch('set_criterio', this.criterios[index])
     },
     app_mouseOverCriterio(index) {
-      EventBus.$emit("CriterioMouseOver", this.criterios[index].descricao);
+      EventBus.$emit("CriterioMouseOver", this.criterios[index]);
     },
     app_mouseLeaveCriterio() {
       EventBus.$emit("CriterioMouseLeave");

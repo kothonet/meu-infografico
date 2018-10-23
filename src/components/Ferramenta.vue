@@ -6,6 +6,7 @@
     lg2>
 
     <v-toolbar 
+      :class="$store.getters.formato===undefined ? 'disabled' : ''"
       color="ferramenta" 
       dark>
 
@@ -23,7 +24,11 @@
           :key="ferramenta.id"
           class="v-list--two-line">
 
-          <v-list-tile @click.prevent.stop="app_selectFerramenta(index)" >
+          <v-list-tile 
+            @click.prevent.stop="app_selectFerramenta(index)" 
+            @mouseover.prevent.stop="app_mouseOverFerramenta(index)"
+            @mouseleave.prevent.stop="app_mouseLeaveFerramenta()">
+
             <v-list-tile-content>
               <v-list-tile-title v-text="ferramenta.nome"/>
             </v-list-tile-content>
@@ -37,7 +42,7 @@
       v-if="this.$store.getters.enfase !== undefined || this.$store.getters.criterio !== undefined || this.$store.getters.formato !== undefined"
       dark 
       class="btn-try-again"
-      @click.prevent.stop="app_try_again()">Tentar Novamente</v-btn>
+      @click.prevent.stop="app_try_again()">Tentar novamente</v-btn>
   </v-flex>
 </template>
 
@@ -192,8 +197,13 @@ export default {
   },
   methods: {
     app_selectFerramenta(index) {
-      this.$store.dispatch("set_ferramenta", this.availableFerramentas[index]);
-      EventBus.$emit("FerramentaSelected");
+      window.open(this.availableFerramentas[index].url,'_blank');
+    },
+    app_mouseOverFerramenta(index) {
+      EventBus.$emit("FerramentaMouseOver", this.availableFerramentas[index]);
+    },
+    app_mouseLeaveFerramenta() {
+      EventBus.$emit("FerramentaMouseLeave");
     },
     app_try_again() {
       this.$store.dispatch('set_enfase', undefined);
@@ -211,6 +221,12 @@ export default {
   width: 100%;
   margin: 0;
   background-color: #f3511e !important;
+  text-transform: none;
+  font-family: Roboto, sans-serif;
+  font-size: 18px;
 }
 
+.v-list__tile__title {
+  font-weight: bold;
+}
 </style>

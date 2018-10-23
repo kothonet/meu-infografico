@@ -27,6 +27,7 @@
     <p>
       email <a href="mailto:marcusdomiciano@gmail.com">marcusdomiciano@gmail.com</a>
     </p>
+    
   </div>
 </template>
 

@@ -60,7 +60,7 @@ export default {
       this.$store.dispatch('set_enfase', this.enfases[index]);
     },
     app_mouseOverEnfase(index) {
-      EventBus.$emit("EnfaseMouseOver", this.enfases[index].descricao);
+      EventBus.$emit("EnfaseMouseOver", this.enfases[index]);
     },
     app_mouseLeaveEnfase() {
       EventBus.$emit("EnfaseMouseLeave");
