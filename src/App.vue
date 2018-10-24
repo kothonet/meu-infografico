@@ -207,7 +207,9 @@ h1 {
 }
 
 .v-toolbar.disabled {
-    filter: brightness(75%);
+    filter: opacity(60%);
+    -moz-opacity: 0.6;
+    opacity: 0.6;
 }
 </style>
 
