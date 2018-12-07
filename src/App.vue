@@ -10,6 +10,16 @@
       <v-toolbar-side-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title v-text="'meuinfografico.com'" />
       <v-spacer />
+      <a 
+        href="https://docs.google.com/forms/d/e/1FAIpQLSeOFadQQYg00juf6tX6jHT1S7DU-Le53m11_W2aXJGSInguPQ/viewform" 
+        class="app-link"
+        target="_blank">
+
+        <div>Formulário de</div>
+        <div>avaliação</div>
+
+      </a>
+      
       <v-btn 
         v-for="(item, i) in items" 
         :key="i" 
@@ -206,6 +216,22 @@ h1 {
   font-size: 36px;
 }
 
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:active {
+  text-decoration: underline;
+}
+
 .v-toolbar.disabled {
     filter: opacity(60%);
     -moz-opacity: 0.6;
@@ -221,5 +247,15 @@ h1 {
 }
 .v-list__tile__title {
   font-size: 20px;
+}
+
+.app-link {
+  font-size: 22px;
+  color: #f9a88f;
+  padding: 0 30px;
+}
+
+.app-link > div {
+   text-align: center;
 }
 </style>
