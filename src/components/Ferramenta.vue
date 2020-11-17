@@ -10,7 +10,7 @@
       color="ferramenta" 
       dark>
 
-      <v-toolbar-title>Ferramentas</v-toolbar-title>
+      <v-toolbar-title>Ferramentas Indicadas</v-toolbar-title>
     </v-toolbar>
 
     <v-scroll-y-transition 
@@ -42,7 +42,7 @@
       v-if="this.$store.getters.enfase !== undefined || this.$store.getters.criterio !== undefined || this.$store.getters.formato !== undefined"
       dark 
       class="btn-try-again"
-      @click.prevent.stop="app_try_again()">Tentar novamente</v-btn>
+      @click.prevent.stop="app_try_again()">Início</v-btn>
   </v-flex>
 </template>
 
@@ -228,5 +228,9 @@ export default {
 
 .v-list__tile__title {
   font-weight: bold;
+}
+
+.v-toolbar__title {
+  text-overflow: clip;
 }
 </style>

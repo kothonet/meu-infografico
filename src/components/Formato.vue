@@ -5,31 +5,57 @@
     sm6
     lg2>
 
-    <v-toolbar 
-      :class="$store.getters.criterio===undefined ? 'disabled' : ''"
-      color="formato" 
-      dark>
-
-      <v-toolbar-title>Formatos</v-toolbar-title>
-
-    </v-toolbar>
+    <v-tooltip 
+      right 
+      color="white">
+      <template v-slot:activator="{ on }">
+        <v-toolbar 
+          :class="$store.getters.criterio===undefined ? 'disabled' : ''"
+          color="formato" 
+          dark
+          v-on="on">
+          <v-toolbar-title>Escolha 3</v-toolbar-title>
+        </v-toolbar>
+      </template>
+      <v-card 
+        max-width="400"
+        class="mx-auto"> 
+        <v-card-title class="headline">FORMATO</v-card-title>
+        <v-card-text class="title">Como você pretende utilizar o infográfico</v-card-text>
+        <v-card-text>(escolher só um)</v-card-text>
+      </v-card>
+    </v-tooltip>
     <v-list two-line>
       <div 
         v-for="(formato, index) in formatos" 
         :key="formato.id">
 
-        <v-list-tile 
-          :disabled="$store.getters.criterio===undefined || $store.getters.formato!==undefined"
-          ripple
-          @click="app_selectFormato(index)"
-          @mouseover.prevent.stop="app_mouseOverFormato(index)"
-          @mouseleave.prevent.stop="app_mouseLeaveFormato()">
+        <v-tooltip 
+          right 
+          color="white">
+          <template v-slot:activator="{ on }">
+            <v-list-tile 
+              :disabled="$store.getters.criterio===undefined || $store.getters.formato!==undefined"
+              ripple
+              @click="app_selectFormato(index)"
+              v-on="on">
+              <v-list-tile-content>
+                <v-list-tile-title v-text="formato.nome"/>
+              </v-list-tile-content>
+              <v-list-tile-avatar v-if="$store.getters.formato !== undefined && formato.id===$store.getters.formato.id"><v-icon>checked</v-icon></v-list-tile-avatar>
+            </v-list-tile>
+          </template>
+          <v-card 
+            v-if="formato.descricao !== ''"
+            max-width="400" 
+            class="mx-auto">
+            <v-card-text 
+              class="headline" 
+              v-text="formato.descricao"/>
+          </v-card>
+        </v-tooltip>
 
-          <v-list-tile-content>
-            <v-list-tile-title v-text="formato.nome"/>
-          </v-list-tile-content>
-          <v-list-tile-avatar v-if="$store.getters.formato !== undefined && formato.id===$store.getters.formato.id"><v-icon>checked</v-icon></v-list-tile-avatar>
-        </v-list-tile>
+
         <v-divider v-if="index < formatos.length-1"/>
       </div>
     </v-list>
@@ -46,8 +72,8 @@ export default {
   data() {
     return {
       formatos: [
-        { id: 1, nome: "Digital", descricao: "material estático produzido através de ferramentas online, para impressão ou utilização em mídias digitais" },
-        { id: 2, nome: "Multimidiático", descricao: "permite a interação com o usuário, a exploração de hipertextos, a sonoridade, realidade aumentada" }
+        { id: 1, nome: "Digital", descricao: "Material estático produzido através de ferramentas online, para impressão ou utilização em mídias digitais" },
+        { id: 2, nome: "Multimidiático", descricao: "Permite a interação com o usuário, a exploração de hipertextos, a sonoridade, realidade aumentada" }
       ]
     };
   },

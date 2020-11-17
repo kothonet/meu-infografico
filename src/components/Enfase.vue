@@ -5,30 +5,55 @@
     sm6
     lg2>
 
-    <v-toolbar 
-      color="enfase" 
-      dark>
+    <v-tooltip 
+      right 
+      color="white">
+      <template v-slot:activator="{ on }">
+        <v-toolbar
+          color="enfase" 
+          dark
+          v-on="on">
+          <v-toolbar-title>Escolha 1</v-toolbar-title>
+        </v-toolbar>
+      </template>
+      <v-card 
+        max-width="400"
+        class="mx-auto">
+        <v-card-title class="headline">ÊNFASE</v-card-title>
+        <v-card-text class="title">O que é mais importante no infográfico que você quer produzir</v-card-text>
+        <v-card-text>(escolher só um)</v-card-text>
+      </v-card>
+    </v-tooltip>
 
-      <v-toolbar-title>Ênfases</v-toolbar-title>
-
-    </v-toolbar>
     <v-list two-line>
       <div 
         v-for="(enfase, index) in enfases" 
         :key="enfase.id">
 
-        <v-list-tile 
-          :disabled="$store.getters.enfase!==undefined"
-          ripple
-          @click.prevent.stop="app_selectEnfase(index)"
-          @mouseover.prevent.stop="app_mouseOverEnfase(index)"
-          @mouseleave.prevent.stop="app_mouseLeaveEnfase()">
-
-          <v-list-tile-content>
-            <v-list-tile-title v-text="enfase.nome"/>
-          </v-list-tile-content>
-          <v-list-tile-avatar v-if="$store.getters.enfase !== undefined && enfase.id==$store.getters.enfase.id"><v-icon>checked</v-icon></v-list-tile-avatar>
-        </v-list-tile>
+        <v-tooltip 
+          :disabled="enfase.descricao === ''"
+          right 
+          color="white">
+          <template v-slot:activator="{ on }">
+            <v-list-tile 
+              :disabled="$store.getters.enfase!==undefined"
+              ripple
+              @click.prevent.stop="app_selectEnfase(index)"
+              v-on="on">
+              <v-list-tile-content>
+                <v-list-tile-title v-text="enfase.nome"/>
+              </v-list-tile-content>
+              <v-list-tile-avatar v-if="$store.getters.enfase !== undefined && enfase.id==$store.getters.enfase.id"><v-icon>checked</v-icon></v-list-tile-avatar>
+            </v-list-tile>
+          </template>
+          <v-card 
+            max-width="400" 
+            class="mx-auto">
+            <v-card-text 
+              class="headline" 
+              v-text="enfase.descricao"/>
+          </v-card>
+        </v-tooltip>
         <v-divider v-if="index < enfases.length-1"/>
 
       </div>
@@ -46,14 +71,15 @@ export default {
   data() {
     return {
       enfases: [
-        { id: 1, nome: "Conteúdo textual", descricao: "parte escrita, com suas opções de fontes, corpo, cores, blocos serem modificados, espaçamento, negrito, itálico" },
-        { id: 2, nome: "Gráficos", descricao: "diagramas, esquemas e suas variações, como wireframes, sitemaps, networks" },
-        { id: 3, nome: "Mapas", descricao: "localizações geográficas" },
-        { id: 4, nome: "Ícones", descricao: "ilustrações, desenhos e formas" },
+        { id: 1, nome: "Conteúdo textual", descricao: "Parte escrita, com suas opções de fontes, corpo, cores, blocos serem modificados, espaçamento, negrito, itálico" },
+        { id: 2, nome: "Gráficos", descricao: "Diagramas, esquemas e suas variações, como wireframes, sitemaps, networks" },
+        { id: 3, nome: "Mapas", descricao: "Localizações geográficas" },
+        { id: 4, nome: "Ícones", descricao: "Ilustrações, desenhos e formas" },
         { id: 5, nome: "Fotos", descricao: "" },
         { id: 6, nome: "Vídeos", descricao: "" }
-      ]
-    };
+      ],
+      show: false
+    }
   },
   methods:{
     app_selectEnfase(index) {
