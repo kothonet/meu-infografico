@@ -7,7 +7,7 @@
 
     <v-tooltip 
       right 
-      color="white">
+      color="formato">
       <template v-slot:activator="{ on }">
         <v-toolbar 
           :class="$store.getters.criterio===undefined ? 'disabled' : ''"
@@ -19,10 +19,15 @@
       </template>
       <v-card 
         max-width="400"
-        class="mx-auto"> 
-        <v-card-title class="headline">FORMATO</v-card-title>
-        <v-card-text class="title">Como você pretende utilizar o infográfico</v-card-text>
-        <v-card-text>(escolher só um)</v-card-text>
+        color="formato"
+        class="mx-auto v-card__white"> 
+        <v-card-text class="title">
+          <div>FORMATO</div>
+          <br>
+          <div>Como você pretende utilizar o infográfico</div>
+          <br>
+          <div>(escolher só um)</div>
+        </v-card-text>
       </v-card>
     </v-tooltip>
     <v-list two-line>
@@ -32,7 +37,7 @@
 
         <v-tooltip 
           right 
-          color="white">
+          color="formato">
           <template v-slot:activator="{ on }">
             <v-list-tile 
               :disabled="$store.getters.criterio===undefined || $store.getters.formato!==undefined"
@@ -48,7 +53,8 @@
           <v-card 
             v-if="formato.descricao !== ''"
             max-width="400" 
-            class="mx-auto">
+            color="formato"
+            class="mx-auto v-card__white">
             <v-card-text 
               class="headline" 
               v-text="formato.descricao"/>

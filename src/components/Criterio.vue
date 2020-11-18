@@ -7,7 +7,7 @@
 
     <v-tooltip 
       right 
-      color="white">
+      color="criterio">
       <template v-slot:activator="{ on }">
         <v-toolbar 
           :class="$store.getters.enfase===undefined ? 'disabled' : ''"
@@ -19,10 +19,16 @@
       </template>
       <v-card 
         max-width="400"
-        class="mx-auto"> 
-        <v-card-title class="headline">CRITÉRIO</v-card-title>
-        <v-card-text class="title">Sua preferência para facilitar a elaboração do infográfico</v-card-text>
-        <v-card-text>(escolher só um)</v-card-text>
+        color="criterio"
+        class="mx-auto v-card__white"
+        flat> 
+        <v-card-text class="title">
+          <div>CRITÉRIO</div>
+          <br>
+          <div>Sua preferência para facilitar a elaboração do infográfico</div>
+          <br>
+          <div>(escolher só um)</div>
+        </v-card-text>
       </v-card>
     </v-tooltip>
     <v-list two-line>
@@ -31,8 +37,9 @@
         :key="criterio.id">
 
         <v-tooltip 
+          :disabled="criterio.descricao === ''"
           right 
-          color="white">
+          color="criterio">
           <template v-slot:activator="{ on }">
             <v-list-tile 
               :disabled="$store.getters.enfase===undefined || $store.getters.criterio!==undefined" 
@@ -48,7 +55,9 @@
           <v-card 
             v-if="criterio.descricao !== ''"
             max-width="400" 
-            class="mx-auto">
+            color="criterio"
+            class="mx-auto v-card__white"
+            flat>
             <v-card-text 
               class="headline" 
               v-text="criterio.descricao"/>
@@ -92,3 +101,4 @@ export default {
   }
 };
 </script>
+

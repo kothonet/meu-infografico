@@ -7,7 +7,7 @@
 
     <v-tooltip 
       right 
-      color="white">
+      color="enfase">
       <template v-slot:activator="{ on }">
         <v-toolbar
           color="enfase" 
@@ -18,10 +18,16 @@
       </template>
       <v-card 
         max-width="400"
-        class="mx-auto">
-        <v-card-title class="headline">ÊNFASE</v-card-title>
-        <v-card-text class="title">O que é mais importante no infográfico que você quer produzir</v-card-text>
-        <v-card-text>(escolher só um)</v-card-text>
+        class="mx-auto v-card__white"
+        color="enfase"
+        flat>
+        <v-card-text class="title">
+          <div>ÊNFASE</div>
+          <br>
+          <div>O que é mais importante no infográfico que você quer produzir</div>
+          <br>
+          <div>(escolher só um)</div>
+        </v-card-text>
       </v-card>
     </v-tooltip>
 
@@ -33,7 +39,8 @@
         <v-tooltip 
           :disabled="enfase.descricao === ''"
           right 
-          color="white">
+          color="enfase"
+          elevation="5">
           <template v-slot:activator="{ on }">
             <v-list-tile 
               :disabled="$store.getters.enfase!==undefined"
@@ -48,7 +55,9 @@
           </template>
           <v-card 
             max-width="400" 
-            class="mx-auto">
+            class="mx-auto v-card__white"
+            color="enfase"
+            flat>
             <v-card-text 
               class="headline" 
               v-text="enfase.descricao"/>
@@ -94,3 +103,4 @@ export default {
   }
 };
 </script>
+

@@ -28,8 +28,6 @@
           </a>
         </template>
 
-        
-
         <v-card>
           <v-card-text>
             <v-container 
@@ -298,6 +296,10 @@ a:active {
   -moz-opacity: 0.6;
   opacity: 0.6;
 }
+
+.v-card__white .v-card__text {
+  color: white;
+}
 </style>
 
 <style scoped>
@@ -319,4 +321,5 @@ a:active {
 .app-link > div {
   text-align: center;
 }
+
 </style>
