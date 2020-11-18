@@ -297,9 +297,6 @@ a:active {
   opacity: 0.6;
 }
 
-.v-card__white .v-card__text {
-  color: white;
-}
 </style>
 
 <style scoped>

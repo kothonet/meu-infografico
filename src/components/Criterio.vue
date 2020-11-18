@@ -7,7 +7,7 @@
 
     <v-tooltip 
       right 
-      color="criterio">
+      color="white">
       <template v-slot:activator="{ on }">
         <v-toolbar 
           :class="$store.getters.enfase===undefined ? 'disabled' : ''"
@@ -19,8 +19,7 @@
       </template>
       <v-card 
         max-width="400"
-        color="criterio"
-        class="mx-auto v-card__white"
+        class="mx-auto"
         flat> 
         <v-card-text class="title">
           <div>CRITÉRIO</div>
@@ -39,7 +38,7 @@
         <v-tooltip 
           :disabled="criterio.descricao === ''"
           right 
-          color="criterio">
+          color="white">
           <template v-slot:activator="{ on }">
             <v-list-tile 
               :disabled="$store.getters.enfase===undefined || $store.getters.criterio!==undefined" 
@@ -55,8 +54,7 @@
           <v-card 
             v-if="criterio.descricao !== ''"
             max-width="400" 
-            color="criterio"
-            class="mx-auto v-card__white"
+            class="mx-auto"
             flat>
             <v-card-text 
               class="headline" 

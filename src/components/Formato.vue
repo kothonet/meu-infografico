@@ -7,7 +7,7 @@
 
     <v-tooltip 
       right 
-      color="formato">
+      color="white">
       <template v-slot:activator="{ on }">
         <v-toolbar 
           :class="$store.getters.criterio===undefined ? 'disabled' : ''"
@@ -19,8 +19,8 @@
       </template>
       <v-card 
         max-width="400"
-        color="formato"
-        class="mx-auto v-card__white"> 
+        class="mx-auto"
+        flat> 
         <v-card-text class="title">
           <div>FORMATO</div>
           <br>
@@ -37,7 +37,7 @@
 
         <v-tooltip 
           right 
-          color="formato">
+          color="white">
           <template v-slot:activator="{ on }">
             <v-list-tile 
               :disabled="$store.getters.criterio===undefined || $store.getters.formato!==undefined"
@@ -53,8 +53,8 @@
           <v-card 
             v-if="formato.descricao !== ''"
             max-width="400" 
-            color="formato"
-            class="mx-auto v-card__white">
+            class="mx-auto"
+            flat>
             <v-card-text 
               class="headline" 
               v-text="formato.descricao"/>

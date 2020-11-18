@@ -7,7 +7,7 @@
 
     <v-tooltip 
       right 
-      color="enfase">
+      color="white">
       <template v-slot:activator="{ on }">
         <v-toolbar
           color="enfase" 
@@ -18,8 +18,7 @@
       </template>
       <v-card 
         max-width="400"
-        class="mx-auto v-card__white"
-        color="enfase"
+        class="mx-auto"
         flat>
         <v-card-text class="title">
           <div>ÊNFASE</div>
@@ -39,8 +38,7 @@
         <v-tooltip 
           :disabled="enfase.descricao === ''"
           right 
-          color="enfase"
-          elevation="5">
+          color="white">
           <template v-slot:activator="{ on }">
             <v-list-tile 
               :disabled="$store.getters.enfase!==undefined"
@@ -55,8 +53,7 @@
           </template>
           <v-card 
             max-width="400" 
-            class="mx-auto v-card__white"
-            color="enfase"
+            class="mx-auto"
             flat>
             <v-card-text 
               class="headline" 
